@@ -16,9 +16,6 @@
 9. **About the Project**
 10. **Code Comments**
 11. **Contact Information**
-12. **Testing and Quality Assurance**
-13. **Legal and Licensing Information**
-14. **Appendix**
 
 ## 1. Introduction
 
