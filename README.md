@@ -63,7 +63,7 @@ To enhance development efficiency, we have included the following dependencies:
 ### Installing the App on Your Device
 
 1. Navigate to the releases section of this repository.
-2. [Download](https://github.com/Mustafa7Ibrahim/madkour_task.git) the latest APK file.
+2. [Download](https://github.com/Mustafa7Ibrahim/madkour_task/tree/main/releases) the latest APK file.
 3. Install the APK on your device.
 
 ## 7. User Guides
