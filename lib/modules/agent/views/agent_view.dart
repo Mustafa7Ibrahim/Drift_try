@@ -33,62 +33,66 @@ class AgentView extends HookWidget {
         child: const Icon(Icons.add),
       ),
       body: users.hasData
-          ? ListView.separated(
-              separatorBuilder: (context, index) => 12.ph,
-              itemCount: users.data!.length,
-              itemBuilder: (context, index) => ListTile(
-                onTap: () {
-                  if (users.data![index].submissionStatus ==
-                      SubmissionStatus.submit) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Already submitted!'),
-                      ),
-                    );
-                    return;
-                  }
-                  showDialog<void>(
-                    context: context,
-                    builder: (context) => SubmitToManger(
-                      customer: users.data![index],
-                    ),
-                  );
-                },
-                title: Text('Name: ${users.data?[index].name}'),
-                subtitle: Text(
-                  'Birthdate: ${users.data?[index].birthDate.toYMD()}',
-                ),
-                trailing: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      users.data![index].submissionStatus.title,
-                      style: TextStyle(
-                        color: users.data![index].submissionStatus ==
-                                SubmissionStatus.submit
-                            ? Colors.green
-                            : Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (users.data![index].customerStatus !=
-                        CustomerStatus.didNotLookAt)
-                      Text(
-                        users.data![index].customerStatus.title,
-                        style: TextStyle(
-                          color: users.data![index].customerStatus ==
-                                  CustomerStatus.approved
-                              ? Colors.green
-                              : Colors.red,
-                          fontWeight: FontWeight.bold,
+          ? users.data!.isEmpty
+              ? const Center(
+                  child: Text('No customers yet!'),
+                )
+              : ListView.separated(
+                  separatorBuilder: (context, index) => 12.ph,
+                  itemCount: users.data!.length,
+                  itemBuilder: (context, index) => ListTile(
+                    onTap: () {
+                      if (users.data![index].submissionStatus ==
+                          SubmissionStatus.submit) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Already submitted!'),
+                          ),
+                        );
+                        return;
+                      }
+                      showDialog<void>(
+                        context: context,
+                        builder: (context) => SubmitToManger(
+                          customer: users.data![index],
                         ),
-                      ),
-                  ],
-                ),
-                leading: const Icon(Icons.person),
-              ),
-            )
+                      );
+                    },
+                    title: Text('Name: ${users.data?[index].name}'),
+                    subtitle: Text(
+                      'Birthdate: ${users.data?[index].birthDate.toYMD()}',
+                    ),
+                    trailing: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          users.data![index].submissionStatus.title,
+                          style: TextStyle(
+                            color: users.data![index].submissionStatus ==
+                                    SubmissionStatus.submit
+                                ? Colors.green
+                                : Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (users.data![index].customerStatus !=
+                            CustomerStatus.didNotLookAt)
+                          Text(
+                            users.data![index].customerStatus.title,
+                            style: TextStyle(
+                              color: users.data![index].customerStatus ==
+                                      CustomerStatus.approved
+                                  ? Colors.green
+                                  : Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                      ],
+                    ),
+                    leading: const Icon(Icons.person),
+                  ),
+                )
           : const Center(
               child: CircularProgressIndicator.adaptive(),
             ),

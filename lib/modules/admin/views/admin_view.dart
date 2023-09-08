@@ -24,18 +24,22 @@ class AdminView extends HookWidget {
         child: const Icon(Icons.add),
       ),
       body: users.hasData
-          ? ListView.separated(
-              separatorBuilder: (context, index) => 12.ph,
-              itemCount: users.data!.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text('Name: ${users.data?[index].name}'),
-                subtitle: Text('Role: ${users.data?[index].role.name}'),
-                trailing: Text(
-                  users.data![index].id.toString(),
-                ),
-                leading: const Icon(Icons.person),
-              ),
-            )
+          ? users.data!.isEmpty
+              ? const Center(
+                  child: Text('No users Yet!'),
+                )
+              : ListView.separated(
+                  separatorBuilder: (context, index) => 12.ph,
+                  itemCount: users.data!.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('${users.data?[index].name}'),
+                    subtitle: Text('${users.data?[index].role.name}'),
+                    trailing: Text(
+                      users.data![index].id.toString(),
+                    ),
+                    leading: const Icon(Icons.person),
+                  ),
+                )
           : const Center(
               child: CircularProgressIndicator.adaptive(),
             ),

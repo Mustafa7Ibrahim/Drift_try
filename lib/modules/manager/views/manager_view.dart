@@ -39,7 +39,21 @@ class ManagerView extends HookWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Approve'),
-                      content: const Text('Are you sure?'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name: ${users.data?[index].name}'),
+                          12.ph,
+                          Text(
+                            'Birthdate: ${users.data?[index].birthDate.toYMD()}',
+                          ),
+                          12.ph,
+                          Text(
+                            'Address: ${users.data?[index].address}',
+                          ),
+                        ],
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () {
