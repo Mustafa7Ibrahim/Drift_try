@@ -155,4 +155,4 @@ While the code aims to be self-explanatory, additional comments can be added whe
 
 ## 11. Contact Information
 
-For questions or clarifications regarding this project, please contact mustafa7ibrahim@gmail.com.
+For questions or clarifications regarding this project, please contact <mustafa7ibrahim@gmail.com>.
