@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:isar/isar.dart';
+import 'package:madkour_task/core/database.dart';
 import 'package:madkour_task/modules/admin/database/admin_database.dart';
 import 'package:madkour_task/modules/admin/models/agent_model.dart';
 import 'package:madkour_task/modules/agent/database/agent_database.dart';
@@ -13,20 +13,24 @@ final gi = GetIt.instance;
 /// This function is used to initialize the [GetIt] instance.
 Future<void> initGetIt() async {
   // init isar
-  final isar = await Isar.open(
-    [
-      AgentModelSchema,
-      CustomerModelSchema,
-    ],
-    directory: await getApplicationCacheDirectory().then(
-      (value) => value.path,
-    ),
-  );
+  // final isar = await Isar.open(
+  //   [
+  //     AgentModelSchema,
+  //     CustomerModelSchema,
+  //   ],
+  //   directory: await getApplicationCacheDirectory().then(
+  //     (value) => value.path,
+  //   ),
+  // );
+
+  /// Registering the [MyDatabase] instance.
+  final database = MyDatabase();
 
   /// Registering the [Isar] instance.
   gi
-    ..registerLazySingleton<Isar>(() => isar)
-    ..registerLazySingleton(AdminDatabase.new)
-    ..registerLazySingleton(AgentDatabase.new)
-    ..registerLazySingleton(ManagerDatabase.new);
+          // ..registerLazySingleton<Isar>(() => isar)
+          .registerLazySingleton(() => AdminDatabase(database))
+      // ..registerLazySingleton(AgentDatabase.new)
+      // ..registerLazySingleton(ManagerDatabase.new)
+      ;
 }

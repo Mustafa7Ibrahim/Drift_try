@@ -12,7 +12,7 @@ class AdminView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final users = useStream(gi<AdminDatabase>().getAllUsers());
+    final users = useStream(gi<AdminDatabase>().allAgentsStream);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -23,25 +23,19 @@ class AdminView extends HookWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: users.hasData
-          ? users.data!.isEmpty
-              ? const Center(
-                  child: Text('No users Yet!'),
-                )
-              : ListView.separated(
-                  separatorBuilder: (context, index) => 12.ph,
-                  itemCount: users.data!.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('${users.data?[index].name}'),
-                    subtitle: Text('${users.data?[index].role.name}'),
-                    trailing: Text(
-                      users.data![index].id.toString(),
-                    ),
-                    leading: const Icon(Icons.person),
-                  ),
-                )
-          : const Center(
-              child: CircularProgressIndicator.adaptive(),
+      body: !users.hasData
+          ? const CircularProgressIndicator.adaptive()
+          : ListView.separated(
+              separatorBuilder: (context, index) => 12.ph,
+              itemCount: users.data?.length ?? 0,
+              itemBuilder: (context, index) => ListTile(
+                title: Text('${users.data?[index].name}'),
+                subtitle: Text('${users.data?[index].role.name}'),
+                trailing: Text(
+                  users.data![index].id.toString(),
+                ),
+                leading: const Icon(Icons.person),
+              ),
             ),
     );
   }
@@ -85,8 +79,11 @@ class AddNewUser extends HookWidget {
           12.ph,
           ElevatedButton(
             onPressed: () {
-              gi<AdminDatabase>().addAgent(
-                AgentModel(name: name.text, role: role.value),
+              gi<AdminDatabase>().insertAgent(
+                AgentModel(
+                  name: name.text,
+                  role: role.value,
+                ),
               );
               Navigator.pop(context);
             },

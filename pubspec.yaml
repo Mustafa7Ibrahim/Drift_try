@@ -37,12 +37,18 @@ dependencies:
   # Custom packages
   easix: ^0.0.4
 
-  # isar
-  isar: ^3.1.0
-  isar_flutter_libs: ^3.1.0
   flutter_hooks: ^0.20.1
+
   path_provider: ^2.1.1
+
   get_it: ^7.6.2
+
+  # draft
+  drift: ^2.13.0
+  
+  sqlite3_flutter_libs: ^0.5.0
+  path: ^1.8.3
+  drift_dev: ^2.13.0
 
 dev_dependencies:
   flutter_test:
@@ -55,11 +61,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   very_good_analysis: ^5.1.0
-  isar_generator:
-    git:
-      url: https://github.com/Kiruel/isar
-      ref: fix/web_build
-      path: packages/isar_generator
   build_runner: ^2.4.6
 
 # For information on the generic Dart part of this file, see the

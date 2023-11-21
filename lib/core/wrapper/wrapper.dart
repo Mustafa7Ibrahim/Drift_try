@@ -17,8 +17,8 @@ class _WrapperState extends State<Wrapper> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     AdminView(),
-    AgentWrapper(),
-    ManagerWrapper(),
+    // AgentWrapper(),
+    // ManagerWrapper(),
   ];
 
   // list of titles for the drawer
